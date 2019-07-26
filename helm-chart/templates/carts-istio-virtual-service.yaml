@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sockshop2-production-carts
+spec:
+  hosts:
+  - "carts.sockshop2-production.34.93.38.20.xip.io"
+  gateways:
+  - sockshop2-production-gateway
+  http:
+    - route:
+      - destination:
+          host: carts.sockshop2-production.svc.cluster.local
+          subset: blue
+        weight: 0
+      - destination:
+          host: carts.sockshop2-production.svc.cluster.local
+          subset: green
+        weight: 100
